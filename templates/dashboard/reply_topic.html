@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="pt-5">
+    {% for post in topic.get_lastest_posts %}
+      <div class="card mb-2">
+        <div class="card-body p-2">
+          <div class="row mb-2">
+            <div class="col-6">
+              <strong class="text-muted">{{ post.created_by.username }}</strong>
+            </div>
+            <div class="col-6 text-right">
+              <small class="text-muted">{{ post.created_at }}</small>
+            </div>
+          </div>
+          <div class="post-body">
+            {{ post.get_message_as_markdown }}
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  <form method="post" class="mb-4" novalidate>
+    {% csrf_token %}
+    {% include 'layouts/form.html' %}
+    <button type="submit" class="btn btn-success">
+      Ajouter votre réponse
+    </button>
+  </form>
+
+{% endblock content %}

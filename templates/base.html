@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        {% load static %} {% get_static_prefix as STATIC_PREFIX %}
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+        {% block css %}
+            <link rel="stylesheet" href="{{ STATIC_PREFIX }}css/simplemde.min.css">
+        {% endblock css %}
+
+        <title>
+            {% if object %}
+                {{ object.name }}
+            {% elif topic %}
+                {{ topic.subject }}
+            {% else %}
+                {{ block.super }}
+            {% endif %}
+            unsta inc 
+        </title>
+    </head>
+
+    <body style="background-image: url({% static "img/background.png" %})" class="d-flex flex-column">
+        <div class="flex-grow-1 flex-shrink-0">
+
+            <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+                <div class="container">
+                    <a class="navbar-brand" href="{% url 'home' %}">Django : on en parle ?</a>
+
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainMenu" aria-controls="mainMenu" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="mainMenu">
+                        {% if user.is_authenticated %}
+                            <ul class="navbar-nav ml-auto">
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle text-white text-uppercase" id="userMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        {{ user.username }}
+                                    </a>
+
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userMenu">
+                                        <a class="dropdown-item" href="{% url 'accounts:account' %}">Mon compte</a>
+                                        
+                                        <div class="dropdown-divider px-2 my-2"></div>
+
+                                        <a class="dropdown-item text-uppercase font-weight-bold" href="{% url 'accounts:logout' %}"> déconnexion</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        {% else %}
+                            <form class="form-inline ml-auto">
+                                <a href="{% url 'accounts:login' %}" class="btn btn-outline-secondary text-uppercase text-white">se connecter</a>
+                                <a href="{% url 'accounts:signup' %}" class="btn btn-light ml-2 text-uppercase">s'inscrire</a>
+                            </form>
+                        {% endif %}
+
+                        <div class="d-flex justify-content-end align-items-center">
+                            <ul class="list-inline mx-md-3 mx-lg-5 mb-0 d-lg-flex">
+                                {% include "layouts/social.html" %}
+                            </ul><!--end social-list link -->
+
+                            <a href="{{ request.get_host }}/donate" target="_blank" class="btn btn-outline-success text-white text-uppercase d-lg-flex">
+                                me soutenir
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            
+            <main class="container">
+                {% block breadcrumb %}
+                {% endblock breadcrumb %}
+
+                {% block content %}
+                {% endblock content %}
+            </main>
+        </div>
+
+        <!-- start footer -->
+        <footer class="footer flex-shrink-0">
+            <div class="container py-3 text-center">
+                <p class="text-monospace font-weight-bold text-uppercase text-white mb-0">&copy;
+                    <script>document.write(new Date().getFullYear());
+                    </script> kozondjango.ci &dash; développé par <a href="https://www.facebook.com/flavien.hugs" target="_blank" title="@flavien-hugs"> flavien-hugs</a> de unsta inc &dash; V0.0.1
+                </p>
+
+            </div>
+        </footer><!--./end footer -->
+        
+
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
+        {% block js %}
+            <script src="{{ STATIC_PREFIX }}js/simplemde.min.js"></script>
+            <script>var simplemde = new SimpleMDE();</script>
+        {% endblock js %}
+    </body>
+</html>

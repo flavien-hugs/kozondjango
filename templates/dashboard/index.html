@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load humanize %}
+{% block breadcrumb %}
+  {% include "layouts/breabcrumb.html" %}
+{% endblock breadcrumb %}
+
+{% block content %}
+  <table class="table table-light">
+    <thead class="thead-inverse">
+      <tr>
+        <th class="text-capitalize">dashboard</th>
+        <th>Articles</th>
+        <th>Sujets</th>
+        <th>Dernières réponses</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for obj in object_list %}
+      <tr>
+        <td>
+          <a title="{{ obj.name }}" href="{% url 'dashboard:topics_dashboard' obj.pk %}">
+          {{ obj.name }}</a>
+          <small class="text-muted d-block">
+            {{ obj.description }}
+          </small>
+        </td>
+        <td class="align-middle">{{ obj.get_posts_count }}</td>
+        <td class="align-middle">{{ obj.topics.count }}</td>
+        <td class="align-middle">
+            {% with post=obj.get_lastest_post %}
+              {% if post %}
+                <small>
+                  <a href="{% url 'dashboard:topic_posts' obj.pk post.topic.pk %}">
+                    Par {{ post.created_by.username }} {{ post.created_at|naturaltime }}
+                  </a>
+                </small>
+              {% else %}
+                <small class="text-muted">
+                  <em>Aucune réponses pour l'instant.</em>
+                </small>
+              {% endif %} 
+            {% endwith %}
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>   
+{% endblock content %}

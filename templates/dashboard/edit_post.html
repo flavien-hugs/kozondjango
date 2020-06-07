@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="row justify-content-center py-5">
+        <form method="post" class="mb-4" novalidate>
+            {% csrf_token %}
+            {% include 'layouts/form.html' %}
+            <button type="submit" class="btn btn-success mr-3">
+                Modifier la réponse
+            </button>
+            <a href="{% url 'dashboard:topic_posts' post.topic.dashboard.pk post.topic.pk %}" class="btn btn-outline-secondary" role="button">
+            Annuler</a>
+        </form>
+    </div>
+{% endblock content %}

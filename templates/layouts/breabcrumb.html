@@ -1,0 +1,33 @@
+<ol class="breadcrumb my-4">
+    <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+    {% if posts %}
+        <li class="breadcrumb-item">
+            <a title="{{ post.topic.dashboard.name }}" href="{% url 'dashboard:topics_dashboard' post.topic.dashboard.pk %}">
+                {{ post.topic.dashboard.name }}
+            </a>
+        </li>
+        <li class="breadcrumb-item">
+            <a href="{% url 'dashboard:topic_posts' post.topic.dashboard.pk post.topic.pk %}">
+            {{ post.topic.subject }}
+            </a>
+        </li>
+        <li class="breadcrumb-item active">
+            Modifier l'article
+        </li>
+    {% elif dashboard %}
+        <li class="breadcrumb-item">
+            <a href="{% url 'dashboard:topics_dashboard' dashboard.pk %}">
+                {{ dashboard.name }}
+            </a>
+        </li>
+        <li class="breadcrumb-item active">Nouveau sujet</li>
+    {% elif topic %}
+        <li class="breadcrumb-item">
+            <a href="{% url 'dashboard:topics_dashboard' topic.dashboard.pk %}">{{ topic.dashboard.name }}</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a href="{% url 'dashboard:topic_posts' topic.dashboard.pk topic.pk %}">{{ topic.subject }}</a>
+        </li>
+        <li class="breadcrumb-item active">Répondre</li>  
+    {% endif %}
+</ol>

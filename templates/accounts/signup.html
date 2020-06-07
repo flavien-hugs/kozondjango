@@ -1,0 +1,35 @@
+{% extends "accounts/ac.html" %}
+
+{% block ac %}
+    <div class="card">
+        <div class="card-body">
+            <h3 class="card-title text-uppercase text-center pb-3"><i class="fa fa-user mr-2"></i> Inscription</h3>
+            {% if form.non_field_errors %}
+                <div class="alert alert-danger" role="alert">
+                    {% for error in form.non_field_errors %}
+                    <p {% if forloop.last %} class="mb-0"{% endif %}>
+                        {{ error }}
+                    </p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <form method="post" novalidate>
+                {% csrf_token %}
+                {% include 'layouts/form.html' %}
+                <!-- Submit Button -->
+                <div class="form-group col-lg-12 mx-auto mb-0">
+                    <button type="submit" class="btn btn-outline-success btn-block shadow-sm py-2">
+                        <span class="font-weight-bold text-uppercase">Créer un compte</span>
+                    </button>
+                </div><!-- /.end button login -->
+
+                {% include 'layouts/rslink.html' %}
+            </form>
+        </div>
+
+        <div class="card-footer text-muted text-center">
+            Vous avez déjà un compte ? <a href="{% url 'accounts:login' %}">Se connecter</a>
+        </div>
+    </div>
+{% endblock ac %}

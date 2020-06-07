@@ -1,0 +1,50 @@
+
+{% extends "accounts/ac.html" %}
+
+{% block ac %}
+    <div class="card">
+        <div class="card-body">
+            <h3 class="card-title text-uppercase text-center pb-3"><i class="fa fa-user mr-2"></i> connexion
+            </h3>
+            {% if form.non_field_errors %}
+            <div class="card-body">
+                <div class="alert alert-danger" role="alert">
+                  {% for error in form.non_field_errors %}
+                  <p {% if forloop.last %}class="mb-0"{% endif %}>
+                      {{ error }}
+                  </p>
+                  {% endfor %}
+              </div>
+          </div>
+          {% endif %}
+
+          <form method="post" novalidate>
+            {% csrf_token %}
+
+            <input type="hidden" name="next" value="{{ next }}">
+            {% include 'layouts/form.html' %}
+            <!-- Submit Button -->
+            <div class="form-group col-lg-12 mx-auto mb-0">
+                <button type="submit" class="btn btn-outline-primary btn-block shadow-sm py-2">
+                    <span class="font-weight-bold text-uppercase">connexion</span>
+                </button>
+            </div><!-- /.end button login -->
+
+            {% include 'layouts/rslink.html' %}
+
+        </form>
+    </div>
+
+    <!-- Not Registered -->
+    <div class="card-footer text-center mt-3 w-100">
+        <p class="text-muted font-weight-bold">Vous n'avez pas de compte ? <a href="{% url 'accounts:signup' %}" class="text-primary ml-2">Inscrivez-vous</a>
+      </p>
+    </div>
+    </div>
+
+    <div class="text-center py-2">
+        <small><a href="{% url 'password_reset' %}" class="text-white">Vous avez oublié votre mot de passe ?</a>
+        </small>
+    </div>
+
+{% endblock ac %}

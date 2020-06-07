@@ -1,0 +1,52 @@
+{% extends "dashboard/index.html" %}
+{% load humanize %}
+
+{% block content %}
+    <div class="mb-4 float-right">
+      <a href="{% url 'dashboard:new_topic' dashboard.pk %}" class="btn btn-success">Ajouter un sujet</a>
+    </div>
+
+    <table class="table table table-light table-striped mb-4">
+      <thead class="thead-inverse">
+        <tr>
+          <th>Sujet</th>
+          <th>Auteur</th>
+          <th>Réponses</th>
+          <th>Vues</th>
+          <th>Dernière mise à jour</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {% for topic in object_list %}
+          {% url 'dashboard:topic_posts' dashboard.pk topic.pk as topic_url %}
+          <tr>
+            <td>
+              <p class="mb-0">
+                <a href="{{ topic_url }}">{{ topic.subject }}</a>
+              </p>
+                
+              <small class="text-muted">
+                Pages:
+                {% for i in topic.get_page_range %}
+                  <a href="{{ topic_url }}?page={{ i }}">
+                    {{ i }}
+                  </a>
+                {% endfor %}
+                
+                {% if topic.has_many_pages %}
+                  ... <a href="{{ topic_url }}?page={{ topic.get_page_count }}">Dernière page</a>
+                {% endif %}
+              </small>
+            </td>
+
+            <td class="align-middle">{{ topic.user.username }}</td>
+            <td class="align-middle">{{ topic.replies }}</td>
+            <td class="align-middle">{{ topic.views }}</td>
+            <td class="align-middle">{{ topic.last_updated|naturaltime }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% include 'layouts/paginate.html' %}
+{% endblock content %}

@@ -1,0 +1,15 @@
+{% extends 'accounts/ac.html' %}
+
+{% block ac %}
+  <div class="card">
+    <div class="card-body">
+        <h3 class="card-title text-center">Mon compte</h3>
+        <form method="post" novalidate>
+          {% csrf_token %}
+          {% include 'layouts/form.html' %}
+          <button type="submit" class="btn btn-success">Enregistrer les modifications</button>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock ac %}
