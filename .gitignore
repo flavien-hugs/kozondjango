@@ -1,4 +1,5 @@
-*.pyc
-.git/*
 .idea/*
+.git/*
+*.pyc
 *.sqlite3
+.env

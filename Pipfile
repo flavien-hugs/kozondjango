@@ -6,6 +6,9 @@ verify_ssl = true
 django = "*"
 Markdown = "*"
 django-widget-tweaks = "*"
+gunicorn = "*"
+python-decouple = "*"
+argon2-cffi = "*"
 
 
 [requires]
