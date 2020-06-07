@@ -3,7 +3,8 @@
 
 {% block content %}
     <div class="mb-4 float-right">
-      <a href="{% url 'dashboard:new_topic' dashboard.pk %}" class="btn btn-success">Ajouter un sujet</a>
+      <a href="{% url 'dashboard:new_topic' dashboard.pk %}" class="btn btn-success">
+        <i class="fa fa-plus mr-2"></i>Ajouter un sujet</a>
     </div>
 
     <table class="table table table-light table-striped mb-4">

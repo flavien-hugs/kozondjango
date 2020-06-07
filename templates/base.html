@@ -11,23 +11,25 @@
         {% endblock css %}
 
         <title>
-            {% if object %}
-                {{ object.name }}
+            {% if dashboard %}
+                {{ dashboard.name }} &mid;
             {% elif topic %}
-                {{ topic.subject }}
+                {{ topic.subject }} &mid;
+            {% elif post %}
+                {{ post.topic.dashboard.name }} &mid;
             {% else %}
-                {{ block.super }}
+                {{ block.super }} 
             {% endif %}
-            unsta inc 
+            kozondjango
         </title>
     </head>
 
-    <body style="background-image: url({% static "img/background.png" %})" class="d-flex flex-column">
+    <body style="background-image: url({{ STATIC_PREFIX }}img/background.png);" class="d-flex flex-column">
         <div class="flex-grow-1 flex-shrink-0">
 
             <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
                 <div class="container">
-                    <a class="navbar-brand" href="{% url 'home' %}">Django : on en parle ?</a>
+                    <a class="navbar-brand font-weight-bold" href="{% url 'home' %}">kozondjango</a>
 
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainMenu" aria-controls="mainMenu" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
@@ -37,23 +39,27 @@
                         {% if user.is_authenticated %}
                             <ul class="navbar-nav ml-auto">
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle text-white text-uppercase" id="userMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        {{ user.username }}
-                                    </a>
+                                    <a class="nav-link dropdown-toggle text-white" id="userMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mon compte</a>
 
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userMenu">
-                                        <a class="dropdown-item" href="{% url 'accounts:account' %}">Mon compte</a>
+                                        <a class="font-weight-bold  dropdown-item" href="{% url 'accounts:account' %}">  &commat;{{ user.username }}</a>
+
+                                        <div class="dropdown-divider px-2 my-2"></div>
                                         
+                                        <a href="{{ request.get_host }}/donate" class="dropdown-item">
+                                            Me soutenir
+                                        </a>
+
                                         <div class="dropdown-divider px-2 my-2"></div>
 
-                                        <a class="dropdown-item text-uppercase font-weight-bold" href="{% url 'accounts:logout' %}"> déconnexion</a>
+                                        <a class="dropdown-item text-uppercase font-weight-bold text-danger" href="{% url 'accounts:logout' %}"> déconnexion</a>
                                     </div>
                                 </li>
                             </ul>
                         {% else %}
                             <form class="form-inline ml-auto">
-                                <a href="{% url 'accounts:login' %}" class="btn btn-outline-secondary text-uppercase text-white">se connecter</a>
-                                <a href="{% url 'accounts:signup' %}" class="btn btn-light ml-2 text-uppercase">s'inscrire</a>
+                                <a href="{% url 'accounts:login' %}" class="btn btn-outline-secondary text-uppercase rounded-0 text-white">se connecter</a>
+                                <a href="{% url 'accounts:signup' %}" class="btn btn-light ml-2 text-uppercase rounded-0">s'inscrire</a>
                             </form>
                         {% endif %}
 
@@ -61,10 +67,6 @@
                             <ul class="list-inline mx-md-3 mx-lg-5 mb-0 d-lg-flex">
                                 {% include "layouts/social.html" %}
                             </ul><!--end social-list link -->
-
-                            <a href="{{ request.get_host }}/donate" target="_blank" class="btn btn-outline-success text-white text-uppercase d-lg-flex">
-                                me soutenir
-                            </a>
                         </div>
                     </div>
                 </div>
@@ -82,9 +84,9 @@
         <!-- start footer -->
         <footer class="footer flex-shrink-0">
             <div class="container py-3 text-center">
-                <p class="text-monospace font-weight-bold text-uppercase text-white mb-0">&copy;
+                <p class="text-monospace font-weight-bold text-uppercase mb-0">&copy;
                     <script>document.write(new Date().getFullYear());
-                    </script> kozondjango &dash; développé par <a href="https://www.facebook.com/flavien.hugs" target="_blank" title="@flavien-hugs"> flavien-hugs </a> de unsta inc &dash; V0.0.1
+                    </script> kozondjango &mdash; développé par <a href="https://www.facebook.com/flavien.hugs" target="_blank" title="@flavien-hugs"> flavien-hugs </a> de unsta inc &mdash; V0.0.1
                 </p>
 
             </div>

@@ -1,15 +1,16 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <div class="pt-5">
+  <div class="py-4">
     {% for post in topic.get_lastest_posts %}
       <div class="card mb-2">
         <div class="card-body p-2">
           <div class="row mb-2">
             <div class="col-6">
-              <strong class="text-muted">{{ post.created_by.username }}</strong>
+              <strong class="text-muted"><i class="fa fa-user mr-2"></i>{{ post.created_by.username }}</strong>
             </div>
             <div class="col-6 text-right">
+              <i class="fa fa-clock mr-2"></i>
               <small class="text-muted">{{ post.created_at }}</small>
             </div>
           </div>
@@ -21,12 +22,12 @@
     {% endfor %}
   </div>
 
-  <form method="post" class="mb-4" novalidate>
+  <form method="post" class="my-2" novalidate>
     {% csrf_token %}
     {% include 'layouts/form.html' %}
-    <button type="submit" class="btn btn-success">
-      Ajouter votre réponse
-    </button>
-  </form>
 
+    <div class="form-group col-lg-12 mb-0">
+      <button type="submit" class="btn btn-success text-white shadow-none"><span class="font-weight-bold text-uppercase">Ajouter votre réponse</span></button>
+    </div>
+  </form>
 {% endblock content %}

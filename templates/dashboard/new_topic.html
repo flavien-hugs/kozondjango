@@ -5,7 +5,10 @@
     <form method="post" class="mb-4" novalidate>
       {% csrf_token %}
       {% include 'layouts/form.html' %}
-      <button type="submit" class="btn btn-success">Ajouter</button>
+
+      <div class="form-group col-lg-12 mb-0"><button type="submit" class="btn btn-success btn-block text-white shadow-none py-2"><span class="font-weight-bold text-uppercase"><i class="fa fa-plus mr-2"></i>ajouter</span>
+            </button>
+      </div>
     </form>
   </div>
 {% endblock %}

@@ -3,11 +3,15 @@
 {% block ac %}
   <div class="card">
     <div class="card-body">
-        <h3 class="card-title text-center">Mon compte</h3>
+        <h3 class="card-title text-center pb-3"><i class="fa fa-user mr-2"></i> Mon compte </h3>
         <form method="post" novalidate>
           {% csrf_token %}
           {% include 'layouts/form.html' %}
-          <button type="submit" class="btn btn-success">Enregistrer les modifications</button>
+
+          <div class="form-group col-lg-12 mx-auto mb-0">
+            <button type="submit" class="btn btn-outline-primary btn-block shadow-sm py-2"><span class="font-weight-bold text-uppercase">Enregistrer les modifications</span>
+            </button>
+          </div>
         </form>
       </div>
     </div>

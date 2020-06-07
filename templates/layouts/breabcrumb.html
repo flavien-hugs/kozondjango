@@ -1,6 +1,9 @@
-<ol class="breadcrumb my-4">
-    <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
-    {% if posts %}
+<ol class="breadcrumb rounded-0 my-4">
+    <li class="breadcrumb-item">
+        <a href="/" class="text-capitalize">
+            <i class="fa fa-home text-success"></i>
+        </a></li>
+    {% if object %}
         <li class="breadcrumb-item">
             <a title="{{ post.topic.dashboard.name }}" href="{% url 'dashboard:topics_dashboard' post.topic.dashboard.pk %}">
                 {{ post.topic.dashboard.name }}
@@ -16,9 +19,7 @@
         </li>
     {% elif dashboard %}
         <li class="breadcrumb-item">
-            <a href="{% url 'dashboard:topics_dashboard' dashboard.pk %}">
-                {{ dashboard.name }}
-            </a>
+            <a href="{% url 'dashboard:topics_dashboard' dashboard.pk %}">{{ dashboard.name }}</a>
         </li>
         <li class="breadcrumb-item active">Nouveau sujet</li>
     {% elif topic %}
