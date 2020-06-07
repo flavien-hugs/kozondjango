@@ -1,16 +1,15 @@
-{% extends 'base.html' %}
+{% extends 'dashboard/index.html' %}
 
 {% block content %}
-  <div class="py-4">
+  <div class="py-2">
     {% for post in topic.get_lastest_posts %}
       <div class="card mb-2">
         <div class="card-body p-2">
           <div class="row mb-2">
             <div class="col-6">
-              <strong class="text-muted"><i class="fa fa-user mr-2"></i>{{ post.created_by.username }}</strong>
+              <strong class="text-muted"><i class="fa fa-user mr-2"></i>&commat;{{ post.created_by.username }}</strong>
             </div>
             <div class="col-6 text-right">
-              <i class="fa fa-clock mr-2"></i>
               <small class="text-muted">{{ post.created_at }}</small>
             </div>
           </div>

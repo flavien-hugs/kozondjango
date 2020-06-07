@@ -31,7 +31,7 @@
               {% if post %}
                 <small>
                   <a href="{% url 'dashboard:topic_posts' obj.pk post.topic.pk %}">
-                    De {{ post.created_by.username }} {{ post.created_at|naturaltime }}
+                    De &commat;{{ post.created_by.username }} {{ post.created_at|naturaltime }}
                   </a>
                 </small>
               {% else %}

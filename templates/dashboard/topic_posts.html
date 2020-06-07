@@ -1,7 +1,8 @@
-{% extends 'base.html' %}
+{% extends 'dashboard/index.html' %}
 {% load avatar %}
+
 {% block content %}
-  <div class="pt-5">
+  <div class="py-2">
     {% for post in object_list %}
       <div id="{{ post.pk }}" class="card {% if forloop.last %}mb-4{% else %}mb-2{% endif %} {% if forloop.first %}border-dark{% endif %}">
       {% if forloop.first %}
@@ -16,10 +17,9 @@
           <div class="col-10">
             <div class="row mb-3">
               <div class="col-6">
-                <strong class="text-muted"><i class="fa fa-user mr-2"></i>{{ post.created_by.username }}</strong>
+                <strong class="text-muted"><i class="fa fa-user mr-2"></i>&commat;{{ post.created_by.username }}</strong>
               </div>
               <div class="col-6 text-right">
-                <i class="fa fa-clock mr-2"></i>
                 <small class="text-muted">{{ post.created_at }}</small>
               </div>
             </div>
@@ -42,4 +42,4 @@
     <a href="{% url 'dashboard:reply_topic' topic.dashboard.pk topic.pk %}" class="btn btn-success" role="button">Répondre</a>
   </div>
 
-{% endblock %}
+{% endblock content %}

@@ -1,7 +1,7 @@
-{% extends 'base.html' %}
+{% extends 'dashboard/index.html' %}
 
 {% block content %}
-  <div class="row justify-content-center py-5">
+  <div class="row justify-content-center py-2">
     <form method="post" class="mb-4" novalidate>
       {% csrf_token %}
       {% include 'layouts/form.html' %}
