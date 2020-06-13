@@ -9,7 +9,8 @@ django-widget-tweaks = "*"
 gunicorn = "*"
 python-decouple = "*"
 argon2-cffi = "*"
-
+django-heroku = "*"
+django-toolbelt = "*"
 
 [requires]
 python_version = "3.8.3"
